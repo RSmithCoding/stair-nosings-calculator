@@ -1,0 +1,13 @@
+# macOS Finder files
+.DS_Store
+
+# Python cache
+__pycache__/
+
+# PDFs created by the program
+*.pdf
+
+# PyInstaller build output
+build/
+dist/
+*.spec

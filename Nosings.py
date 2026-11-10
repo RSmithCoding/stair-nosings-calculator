@@ -14,7 +14,7 @@ print("Nosing Size Calculator - Press 'D' when done or 'R' to remove last item")
 print()
 
 while takeSize not in ("d","D"):
-    takeSize = input("Please enter the Nosing Size then Enter (D when done) > ")
+    takeSize = input("Please enter the Nosing Size, takes any measurements just make sure the units match. Enter ('D' when done) > ")
     if takeSize not in ("d","D","r","R"):
         sizes.append(takeSize)
         clear()
@@ -27,6 +27,7 @@ while takeSize not in ("d","D"):
         print()
         continue    
     else:
+        print("Please enter a vaild size or enter 'D' or 'R' > ")
         continue
 
 clear()
@@ -34,8 +35,6 @@ print("Order Summery")
 print()
 sizes.sort()
 
-#print(*sizes)
-#print()
 
 total = sum(map(float, sizes))
 quantity = collections.Counter(sizes)
@@ -49,51 +48,39 @@ for key, value in quantity.items():
 
 
 print()
-choice = input("Would you like to print to PDF? Y/N > ")
+choice = input("Enter 'Y' to print summary to a PDF file or 'N' to quit > ")
 
-    
-dict = {"one":1,"two":2,"three":3}
-
-list = [1,2,3,4,5]
+while choice not in ("y","Y","n","N"):
 
 
-if choice in ("y","Y"):
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    pdf.cell(200, 10, txt="Order Summery", ln=1, align="C")
-    pdf.ln()
-    pdf.ln()
-    
-#    for i in list:
-#        pdf.write(5,str(i))
-#        pdf.ln()
-
-    for key, value in quantity.items():
-        #txt = (f"{key}\t...\t{value}")
-        #txt2 = (f"{value}")
-        #txt = "{:<8} {:<8}".format(key, value)
-        #pdf.write(5,str(txt))
-        pdf.cell(50,5, txt=str(key),ln=0,align="L")
-        pdf.cell(50,5, txt=str(value),ln=0,align="L")
+    if choice in ("y","Y"):
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Arial", size=12)
+        pdf.cell(200, 10, txt="Order Summery", ln=1, align="C")
         pdf.ln()
-#    keyslist = []
-
-#    for key, item in quantity.items():
-#        print(key)
-#        print(item)
-
-    #print(keyslist)
+        pdf.ln()
+    
 
 
-    pdf.cell(200, 30, txt=(f"Total... {str(total)}           "), ln=1, align="R")
-
-    pdf.output("test.pdf")
-
-    quit()
-elif choice in ("N","n"):
-    quit()
-else:
-    choice = input("Please enter Y/N... >")
+        for key, value in quantity.items():
+ 
+            pdf.cell(50,5, txt=str(key),ln=0,align="L")
+            pdf.cell(50,5, txt=str(value),ln=0,align="L")
+            pdf.ln()
 
 
+
+        pdf.cell(200, 30, txt=(f"Total... {str(total)}           "), ln=1, align="R")
+
+        pdf.output("Nosing Order Summary.pdf")
+
+        input("Nosing Order Summary.pdf has been saved in the program directory press any key to quit.. ")
+        break
+    elif choice in ("N","n"):
+        break
+    else:
+        choice = input("Enter 'Y' to print summary to a PDF file or 'N' to quit > ")
+
+
+quit()
