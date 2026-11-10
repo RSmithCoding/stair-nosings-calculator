@@ -31,7 +31,7 @@ while takeSize not in ("d","D"):
         continue
 
 clear()
-print("Order Summery")    
+print("Order Summary")    
 print()
 sizes.sort()
 
@@ -57,7 +57,7 @@ while choice not in ("y","Y","n","N"):
         pdf = FPDF()
         pdf.add_page()
         pdf.set_font("Arial", size=12)
-        pdf.cell(200, 10, txt="Order Summery", ln=1, align="C")
+        pdf.cell(200, 10, txt="Order Summary", ln=1, align="C")
         pdf.ln()
         pdf.ln()
     
