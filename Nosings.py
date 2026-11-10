@@ -52,35 +52,37 @@ choice = input("Enter 'Y' to print summary to a PDF file or 'N' to quit > ")
 
 while choice not in ("y","Y","n","N"):
 
+    choice = input("Enter 'Y' to print summary to a PDF file or 'N' to quit > ")
 
-    if choice in ("y","Y"):
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", size=12)
-        pdf.cell(200, 10, txt="Order Summary", ln=1, align="C")
-        pdf.ln()
-        pdf.ln()
+
+if choice in ("y","Y"):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+    pdf.cell(200, 10, txt="Order Summary", ln=1, align="C")
+    pdf.ln()
+    pdf.ln()
     
 
 
-        for key, value in quantity.items():
+    for key, value in quantity.items():
  
-            pdf.cell(50,5, txt=str(key),ln=0,align="L")
-            pdf.cell(50,5, txt=str(value),ln=0,align="L")
-            pdf.ln()
+        pdf.cell(50,5, txt=str(key),ln=0,align="L")
+        pdf.cell(50,5, txt=str(value),ln=0,align="L")
+        pdf.ln()
 
 
 
-        pdf.cell(200, 30, txt=(f"Total... {str(total)}           "), ln=1, align="R")
+    pdf.cell(200, 30, txt=(f"Total... {str(total)}           "), ln=1, align="R")
 
-        pdf.output("Nosing Order Summary.pdf")
+    pdf.output("Nosing Order Summary.pdf")
 
-        input("Nosing Order Summary.pdf has been saved in the program directory press any key to quit.. ")
-        break
-    elif choice in ("N","n"):
-        break
-    else:
-        choice = input("Enter 'Y' to print summary to a PDF file or 'N' to quit > ")
+    input("Nosing Order Summary.pdf has been saved in the program directory press any key to quit.. ")
 
+    quit()
+    
+elif choice in ("N","n"):
 
-quit()
+    quit()
+        
+  
