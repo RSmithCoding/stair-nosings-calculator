@@ -12,7 +12,8 @@ I built this while working for a flooring distributor, to make life easier for t
 - Remove the last size entered if you make a mistake
 - Order summary that groups matching sizes and counts how many of each
 - Total length of all nosings
-- Works with any unit of measurement, as long as one order uses the same unit throughout
+- Ignores anything that isn't a number, so a typo can't break the order
+- Treats 0.9 and 0.900 as the same size, however the customer wrote it
 - Optional PDF export of the order summary
 
 ## Built with
@@ -31,7 +32,7 @@ pip3 install fpdf
 python3 Nosings.py
 ```
 
-Sizes can be in any unit (mm, cm or metres), because customers sent measurements in whatever form suited them, on paper or by email. Just use the same unit for every size in one order.
+Sizes are step widths in metres, to the nearest mm (for example 0.9 or 0.925). Customers sent measurements in whatever form suited them, on paper or by email, and sales staff typed them in.
 
 Type each nosing size and press Enter. Type `R` to remove the last size or `D` when you're done. The summary is then shown on screen, and you can choose to save it as a PDF called `Nosing Order Summary.pdf` in the same folder.
 
@@ -44,9 +45,9 @@ Total Size... 6.45
 
 Size        Quantity
 
-0.9     ...     2
-1.05    ...     1
-1.2     ...     3
+0.9            2
+1.05           1
+1.2            3
 ```
 
 ## Project status
@@ -63,6 +64,5 @@ The command-line version (`Nosings.py`) is the working program. `NosingsGui.py` 
 ## Ideas for improvement
 
 - Build out the desktop version
-- Check each entry is a valid number before adding it, so a typo can't crash the program at the total
 - Name each PDF after the customer or date, so a new order doesn't overwrite the last one
 - Make the screen-clearing work on Windows as well as macOS
