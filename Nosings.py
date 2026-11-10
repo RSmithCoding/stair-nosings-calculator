@@ -10,25 +10,44 @@ def clear():
 
 clear()
 
-print("Nosing Size Calculator - Press 'D' when done or 'R' to remove last item")
+print("Nosing Size Calculator")
 print()
 
-while takeSize not in ("d","D"):
-    takeSize = input("Please enter the Nosing Size, takes any measurements just make sure the units match. Enter ('D' when done) > ")
-    if takeSize not in ("d","D","r","R"):
-        sizes.append(takeSize)
+while True:
+
+    print("Please enter the Nosing Size, takes any measurements just make sure the units match")
+    takeSize = input("Enter ('D' when done, 'R' to remove) > ").strip().lower()
+
+    try:
+        size = float(takeSize)
+        sizes.append(size)
+        clear()
+        print(*sizes) 
+        print("")   
+        continue
+
+    except ValueError:
         clear()
         print(*sizes)
         print("")
-    if takeSize in ("R","r"):
-        sizes.pop()
-        clear()
-        print(*sizes)
-        print()
-        continue    
-    else:
-        print("Please enter a vaild size or enter 'D' or 'R' > ")
-        continue
+        pass
+
+    if takeSize == "d":
+        break
+
+    elif takeSize == "r":
+        if sizes:
+            sizes.pop()
+            clear()
+            print(*sizes)
+            print("")
+
+        else:
+            input("No sizes have been entered, press any key to continue.. ")
+            clear()
+
+
+
 
 clear()
 print("Order Summary")    
@@ -36,7 +55,7 @@ print()
 sizes.sort()
 
 
-total = sum(map(float, sizes))
+total = round(sum(map(float, sizes)),3)
 quantity = collections.Counter(sizes)
 
 print(f"Total Size... {total}")
@@ -44,7 +63,7 @@ print()
 print("Size        Quantity")
 print()
 for key, value in quantity.items():
-    print(f"{key}\t...\t{value}")
+    print(f"{key:<15}{value}")
 
 
 print()
@@ -77,6 +96,7 @@ if choice in ("y","Y"):
 
     pdf.output("Nosing Order Summary.pdf")
 
+    print("")
     input("Nosing Order Summary.pdf has been saved in the program directory press any key to quit.. ")
 
     quit()
